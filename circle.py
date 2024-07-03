@@ -111,38 +111,58 @@ def calculate_real_steps():
     return real_left_steps, real_right_steps
 
 
-def ros_geklaut(x, y, theta):
+def turn(theta):
+    print(theta)
+
+    # in bereich -pi bis pi konvertieren
+    theta = theta % (2 * math.pi)
+    if theta > math.pi:
+        theta -= 2 * math.pi
 
     real_left_steps, _ = calculate_real_steps()
+    turn_direction = 1
+    if theta < 0:
+        turn_direction = -1
+        theta_to_goal = -1 * theta
 
-    theta_to_goal = math.atan(y/x)
-    print(theta_to_goal)
-    steps_for_turn = ((((theta_to_goal * WHEEL_DISTANCE) / 2)/WHEEL_CIRCUMFERENCE) * 1000)
+    steps_for_turn = (((theta_to_goal * WHEEL_DISTANCE) / 2) * MOTOR_STEP_DISTANCE)
 
     step_goal_left = steps_for_turn + real_left_steps
 
-    print(step_goal_left, real_left_steps, steps_for_turn, MOTOR_STEP_DISTANCE, (((theta_to_goal * WHEEL_DISTANCE) / 2)/WHEEL_CIRCUMFERENCE) )
+    print(step_goal_left, real_left_steps, steps_for_turn)
 
+    # TODO zählt der die Schritte immer Hoch auch wenn der Rückwärts fährt?
     while real_left_steps < step_goal_left:
         real_left_steps, _ = calculate_real_steps()
-
+        move_wheels(turn_direction * 2, (256 - turn_direction * 2) % 256)
         print(real_left_steps)
 
-        move_wheels(2, 0xFE)
     print("reached")
 
+def move_straight(distance):
     # Update the estimate for x, y, and rotation
-    distance_steps = math.sqrt(x**2 + y**2) / MOTOR_STEP_DISTANCE
-    step_goal_left = distance_steps + real_left_steps
+    real_left_steps, _ = calculate_real_steps()
 
-    print("distance_steps:", distance_steps)
+    step_goal_left = distance/ MOTOR_STEP_DISTANCE + real_left_steps
+
+    print("distance_steps:", distance/ MOTOR_STEP_DISTANCE)
 
     while real_left_steps < step_goal_left:
         real_left_steps, _ = calculate_real_steps()
-
+        move_wheels(2, 2)
         print(real_left_steps)
 
-        move_wheels(2,2)
+
+def ros_geklaut(x, y, theta_final):
+
+    theta_to_goal = math.atan2(y, x)
+
+    turn(theta_to_goal)
+
+    move_straight(math.sqrt(x ** 2 + y ** 2) )
+
+    turn(theta_final - theta_to_goal)
+
 
 
 
