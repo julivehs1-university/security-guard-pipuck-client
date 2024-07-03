@@ -1,0 +1,21 @@
+syntax = "proto2";
+
+package protocol;
+
+option java_multiple_files = true;
+option java_package = "securityguard.proto";
+option java_outer_classname = "ClientProtos";
+
+
+
+message Command {
+    oneof CommandOneof {
+        MoveRelativeCommand moveRelativeCommand = 1;
+    }
+}
+
+message MoveRelativeCommand {
+  required float x = 1;
+  required float y = 2;
+  required float theta = 3;
+}
