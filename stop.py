@@ -6,7 +6,6 @@ import math
 from smbus2 import SMBus, i2c_msg
 import sys
 import time
-import traceback
 
 I2C_CHANNEL = 12
 LEGACY_I2C_CHANNEL = 4
@@ -31,26 +30,18 @@ MAX_MOTOR_STEPS_RAW = 65536
 MAX_SPEED = 1000
 
 
-i2c_last_called = 0
+
 
 def update_robot_sensors_and_actuators():
-    global sensors_data, actuators_data, i2c_last_called
-    now = time.time() * 1000
-    while now - i2c_last_called < 50:
-        now = time.time() * 1000
-        time.sleep(0.00001)
-    i2c_last_called = time.time() * 1000
+    global sensors_data
+    global actuators_data
     try:
         write = i2c_msg.write(ROB_ADDR, actuators_data)
         read = i2c_msg.read(ROB_ADDR, SENSORS_SIZE)
         bus.i2c_rdwr(write, read)
         sensors_data = list(read)
-    except Exception as e:
-        traceback.print_exc()
+    except:
         sys.exit(1)
-        #print("try again")
-
-        #update_robot_sensors_and_actuators()
 
 
 try:
@@ -94,20 +85,17 @@ _real_right_steps_previous = initial_right_steps
 _left_overflows = 0
 _right_overflows = 0
 
-# TODO real steps springen um
-#left 32741.0 oberflow 0 real 32741.0 prev 0
-#left -32766.0 oberflow 0 real -32766.0 prev 0
 def calculate_real_steps():
-    global _left_overflows, _right_overflows, _left_steps_previous, _right_steps_previous
+    global _left_overflows, _right_overflows
     # Get current steps
     for i in range(2):
         mot_steps[i] = sensors_data[41 + i * 2 + 1] * 256 + sensors_data[41 + i * 2]
-    left_steps = int(mot_steps[0]) - MAX_MOTOR_STEPS_RAW/2
-    right_steps = int(mot_steps[1])- MAX_MOTOR_STEPS_RAW/2
+    left_steps = int(mot_steps[0])
+    right_steps = int(mot_steps[1])
 
     # Check for overflows and underflows
     if left_steps + (MAX_MOTOR_STEPS_RAW / 2.0) < _left_steps_previous:
-        _left_overflows += 1
+        _left_overflows = _left_overflows + 1
     elif left_steps > _left_steps_previous + (MAX_MOTOR_STEPS_RAW / 2.0):
         _left_overflows -= 1
 
@@ -120,21 +108,11 @@ def calculate_real_steps():
     real_left_steps = left_steps + _left_overflows * MAX_MOTOR_STEPS_RAW
     real_right_steps = right_steps + _right_overflows * MAX_MOTOR_STEPS_RAW
 
-    # Update previous steps to current
-    _left_steps_previous = left_steps
-    _right_steps_previous = right_steps
-    _real_left_steps_previous = real_left_steps
-    _real_right_steps_previous = real_right_steps
-    print("left", left_steps, "oberflow", _left_overflows, "real", real_left_steps, "prev", _left_steps_previous)
-
     return real_left_steps, real_right_steps
 
 
-
-
-
 def turn(theta):
-    print("theta", theta)
+    print(theta)
 
     # in bereich -pi bis pi konvertieren
     theta = theta % (2 * math.pi)
@@ -147,39 +125,36 @@ def turn(theta):
     if theta < 0:
         turn_direction = -1
         theta_to_goal = -1 * theta
-    print("to goal theta", theta_to_goal)
+    print("to goal", theta_to_goal)
 
-    steps_for_turn = ((((theta_to_goal * WHEEL_DISTANCE) / 2) / WHEEL_CIRCUMFERENCE) * 1000)
+    steps_for_turn = (((theta_to_goal * WHEEL_DISTANCE) / 2) * MOTOR_STEP_DISTANCE)
 
+    print("steps to goal", steps_for_turn)
 
-    print( "real", real_left_steps, "steps for turn", steps_for_turn)
-    from_steps = real_left_steps - steps_for_turn
-    to_steps = real_left_steps + steps_for_turn
+    step_goal_left = steps_for_turn + real_left_steps
 
+    print(step_goal_left, real_left_steps, steps_for_turn)
 
-    while  from_steps  < real_left_steps < to_steps:
+    # TODO zählt der die Schritte immer Hoch auch wenn der Rückwärts fährt?
+    while real_left_steps < step_goal_left:
         real_left_steps, _ = calculate_real_steps()
-        move_wheels((256 + turn_direction * 2) % 256, (256 - turn_direction * 2) % 256)
+        move_wheels(turn_direction * 2, (256 - turn_direction * 2) % 256)
+        print(real_left_steps)
 
-    move_wheels(0, 0)
-    print("reached turn")
+    print("reached")
 
 def move_straight(distance):
     # Update the estimate for x, y, and rotation
     real_left_steps, _ = calculate_real_steps()
 
-    step_goal_left = distance/ MOTOR_STEP_DISTANCE
-    from_steps = real_left_steps - step_goal_left
-    to_steps = real_left_steps + step_goal_left
+    step_goal_left = distance/ MOTOR_STEP_DISTANCE + real_left_steps
 
-    print("distance_steps:", distance/ MOTOR_STEP_DISTANCE, "real", real_left_steps, "from", from_steps, "to", real_left_steps, "to", to_steps)
+    print("distance_steps:", distance/ MOTOR_STEP_DISTANCE)
 
-    while from_steps < real_left_steps < to_steps:
+    while real_left_steps < step_goal_left:
         real_left_steps, _ = calculate_real_steps()
         move_wheels(2, 2)
-
-    move_wheels(0, 0)
-    print("reached straigt")
+        print(real_left_steps)
 
 
 def ros_geklaut(x, y, theta_final):
@@ -196,14 +171,8 @@ def ros_geklaut(x, y, theta_final):
 
 
 while 1:
-    # print("x")
-    # x = input()
-    # print("y")
-    # y = input()
-    # print("angle")
-    # angle = input()
-    # start = time.time()
 
+    start = time.time()
 
     checksum = 0
     for i in range(ACTUATORS_SIZE - 1):
@@ -212,7 +181,7 @@ while 1:
 
     update_robot_sensors_and_actuators()
 
-    ros_geklaut(0.1,0.1,math.pi/2)
+    #ros_geklaut(0.1,0.1,math.pi/2)
     move_wheels(0,0)
     print("stopp")
     break
