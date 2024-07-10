@@ -94,9 +94,6 @@ _real_right_steps_previous = initial_right_steps
 _left_overflows = 0
 _right_overflows = 0
 
-# TODO real steps springen um
-#left 32741.0 oberflow 0 real 32741.0 prev 0
-#left -32766.0 oberflow 0 real -32766.0 prev 0
 def calculate_real_steps():
     global _left_overflows, _right_overflows, _left_steps_previous, _right_steps_previous
     # Get current steps

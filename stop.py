@@ -135,7 +135,6 @@ def turn(theta):
 
     print(step_goal_left, real_left_steps, steps_for_turn)
 
-    # TODO zählt der die Schritte immer Hoch auch wenn der Rückwärts fährt?
     while real_left_steps < step_goal_left:
         real_left_steps, _ = calculate_real_steps()
         move_wheels(turn_direction * 2, (256 - turn_direction * 2) % 256)
