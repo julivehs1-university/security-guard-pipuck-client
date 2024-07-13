@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0c\x43lient.proto\x12\treal.grpc\"\x07\n\x05\x45mpty\" \n\x0cPingResponse\x12\x10\n\x08robot_id\x18\x01 \x01(\x05\"\x1f\n\x0cMoveResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\":\n\x13MoveRelativeCommand\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\r\n\x05theta\x18\x03 \x01(\x02\x32\x83\x01\n\x07Tracker\x12\x33\n\x04Ping\x12\x10.real.grpc.Empty\x1a\x17.real.grpc.PingResponse\"\x00\x12\x43\n\x06MoveTo\x12\x1e.real.grpc.MoveRelativeCommand\x1a\x17.real.grpc.MoveResponse\"\x00\x42\x02P\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0c\x43lient.proto\x12\x10real.grpc.client\"\x07\n\x05\x45mpty\" \n\x0cPingResponse\x12\x10\n\x08robot_id\x18\x01 \x01(\x05\"\x1f\n\x0cMoveResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\":\n\x13MoveRelativeCommand\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\x12\r\n\x05theta\x18\x03 \x01(\x02\x32\x9e\x01\n\x06\x43lient\x12\x41\n\x04Ping\x12\x17.real.grpc.client.Empty\x1a\x1e.real.grpc.client.PingResponse\"\x00\x12Q\n\x06MoveTo\x12%.real.grpc.client.MoveRelativeCommand\x1a\x1e.real.grpc.client.MoveResponse\"\x00\x42\x02P\x01\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,14 +22,14 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'Client_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'P\001'
-  _globals['_EMPTY']._serialized_start=27
-  _globals['_EMPTY']._serialized_end=34
-  _globals['_PINGRESPONSE']._serialized_start=36
-  _globals['_PINGRESPONSE']._serialized_end=68
-  _globals['_MOVERESPONSE']._serialized_start=70
-  _globals['_MOVERESPONSE']._serialized_end=101
-  _globals['_MOVERELATIVECOMMAND']._serialized_start=103
-  _globals['_MOVERELATIVECOMMAND']._serialized_end=161
-  _globals['_TRACKER']._serialized_start=164
-  _globals['_TRACKER']._serialized_end=295
+  _globals['_EMPTY']._serialized_start=34
+  _globals['_EMPTY']._serialized_end=41
+  _globals['_PINGRESPONSE']._serialized_start=43
+  _globals['_PINGRESPONSE']._serialized_end=75
+  _globals['_MOVERESPONSE']._serialized_start=77
+  _globals['_MOVERESPONSE']._serialized_end=108
+  _globals['_MOVERELATIVECOMMAND']._serialized_start=110
+  _globals['_MOVERELATIVECOMMAND']._serialized_end=168
+  _globals['_CLIENT']._serialized_start=171
+  _globals['_CLIENT']._serialized_end=329
 # @@protoc_insertion_point(module_scope)

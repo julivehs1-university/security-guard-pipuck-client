@@ -1,9 +1,9 @@
 syntax = "proto3";
 option java_multiple_files = true;
-package real.grpc;
+package real.grpc.client;
 
 
-service Tracker {
+service Client {
   rpc Ping (Empty) returns (PingResponse) {}
   rpc MoveTo (MoveRelativeCommand) returns (MoveResponse) {}
 }

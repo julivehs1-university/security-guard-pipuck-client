@@ -2,52 +2,74 @@
 // source: Client.proto
 
 // Protobuf Java Version: 3.25.1
-package real.grpc;
+package real.grpc.client;
 
 /**
- * Protobuf type {@code real.grpc.PingResponse}
+ * Protobuf type {@code real.grpc.client.MoveRelativeCommand}
  */
-public final class PingResponse extends
+public final class MoveRelativeCommand extends
     com.google.protobuf.GeneratedMessageV3 implements
-    // @@protoc_insertion_point(message_implements:real.grpc.PingResponse)
-    PingResponseOrBuilder {
+    // @@protoc_insertion_point(message_implements:real.grpc.client.MoveRelativeCommand)
+    MoveRelativeCommandOrBuilder {
 private static final long serialVersionUID = 0L;
-  // Use PingResponse.newBuilder() to construct.
-  private PingResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+  // Use MoveRelativeCommand.newBuilder() to construct.
+  private MoveRelativeCommand(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
     super(builder);
   }
-  private PingResponse() {
+  private MoveRelativeCommand() {
   }
 
   @java.lang.Override
   @SuppressWarnings({"unused"})
   protected java.lang.Object newInstance(
       UnusedPrivateParameter unused) {
-    return new PingResponse();
+    return new MoveRelativeCommand();
   }
 
   public static final com.google.protobuf.Descriptors.Descriptor
       getDescriptor() {
-    return real.grpc.Client.internal_static_real_grpc_PingResponse_descriptor;
+    return real.grpc.client.ClientOuterClass.internal_static_real_grpc_client_MoveRelativeCommand_descriptor;
   }
 
   @java.lang.Override
   protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internalGetFieldAccessorTable() {
-    return real.grpc.Client.internal_static_real_grpc_PingResponse_fieldAccessorTable
+    return real.grpc.client.ClientOuterClass.internal_static_real_grpc_client_MoveRelativeCommand_fieldAccessorTable
         .ensureFieldAccessorsInitialized(
-            real.grpc.PingResponse.class, real.grpc.PingResponse.Builder.class);
+            real.grpc.client.MoveRelativeCommand.class, real.grpc.client.MoveRelativeCommand.Builder.class);
   }
 
-  public static final int ROBOT_ID_FIELD_NUMBER = 1;
-  private int robotId_ = 0;
+  public static final int X_FIELD_NUMBER = 1;
+  private float x_ = 0F;
   /**
-   * <code>int32 robot_id = 1;</code>
-   * @return The robotId.
+   * <code>float x = 1;</code>
+   * @return The x.
    */
   @java.lang.Override
-  public int getRobotId() {
-    return robotId_;
+  public float getX() {
+    return x_;
+  }
+
+  public static final int Y_FIELD_NUMBER = 2;
+  private float y_ = 0F;
+  /**
+   * <code>float y = 2;</code>
+   * @return The y.
+   */
+  @java.lang.Override
+  public float getY() {
+    return y_;
+  }
+
+  public static final int THETA_FIELD_NUMBER = 3;
+  private float theta_ = 0F;
+  /**
+   * <code>float theta = 3;</code>
+   * @return The theta.
+   */
+  @java.lang.Override
+  public float getTheta() {
+    return theta_;
   }
 
   private byte memoizedIsInitialized = -1;
@@ -64,8 +86,14 @@ private static final long serialVersionUID = 0L;
   @java.lang.Override
   public void writeTo(com.google.protobuf.CodedOutputStream output)
                       throws java.io.IOException {
-    if (robotId_ != 0) {
-      output.writeInt32(1, robotId_);
+    if (java.lang.Float.floatToRawIntBits(x_) != 0) {
+      output.writeFloat(1, x_);
+    }
+    if (java.lang.Float.floatToRawIntBits(y_) != 0) {
+      output.writeFloat(2, y_);
+    }
+    if (java.lang.Float.floatToRawIntBits(theta_) != 0) {
+      output.writeFloat(3, theta_);
     }
     getUnknownFields().writeTo(output);
   }
@@ -76,9 +104,17 @@ private static final long serialVersionUID = 0L;
     if (size != -1) return size;
 
     size = 0;
-    if (robotId_ != 0) {
+    if (java.lang.Float.floatToRawIntBits(x_) != 0) {
       size += com.google.protobuf.CodedOutputStream
-        .computeInt32Size(1, robotId_);
+        .computeFloatSize(1, x_);
+    }
+    if (java.lang.Float.floatToRawIntBits(y_) != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeFloatSize(2, y_);
+    }
+    if (java.lang.Float.floatToRawIntBits(theta_) != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeFloatSize(3, theta_);
     }
     size += getUnknownFields().getSerializedSize();
     memoizedSize = size;
@@ -90,13 +126,20 @@ private static final long serialVersionUID = 0L;
     if (obj == this) {
      return true;
     }
-    if (!(obj instanceof real.grpc.PingResponse)) {
+    if (!(obj instanceof real.grpc.client.MoveRelativeCommand)) {
       return super.equals(obj);
     }
-    real.grpc.PingResponse other = (real.grpc.PingResponse) obj;
+    real.grpc.client.MoveRelativeCommand other = (real.grpc.client.MoveRelativeCommand) obj;
 
-    if (getRobotId()
-        != other.getRobotId()) return false;
+    if (java.lang.Float.floatToIntBits(getX())
+        != java.lang.Float.floatToIntBits(
+            other.getX())) return false;
+    if (java.lang.Float.floatToIntBits(getY())
+        != java.lang.Float.floatToIntBits(
+            other.getY())) return false;
+    if (java.lang.Float.floatToIntBits(getTheta())
+        != java.lang.Float.floatToIntBits(
+            other.getTheta())) return false;
     if (!getUnknownFields().equals(other.getUnknownFields())) return false;
     return true;
   }
@@ -108,51 +151,58 @@ private static final long serialVersionUID = 0L;
     }
     int hash = 41;
     hash = (19 * hash) + getDescriptor().hashCode();
-    hash = (37 * hash) + ROBOT_ID_FIELD_NUMBER;
-    hash = (53 * hash) + getRobotId();
+    hash = (37 * hash) + X_FIELD_NUMBER;
+    hash = (53 * hash) + java.lang.Float.floatToIntBits(
+        getX());
+    hash = (37 * hash) + Y_FIELD_NUMBER;
+    hash = (53 * hash) + java.lang.Float.floatToIntBits(
+        getY());
+    hash = (37 * hash) + THETA_FIELD_NUMBER;
+    hash = (53 * hash) + java.lang.Float.floatToIntBits(
+        getTheta());
     hash = (29 * hash) + getUnknownFields().hashCode();
     memoizedHashCode = hash;
     return hash;
   }
 
-  public static real.grpc.PingResponse parseFrom(
+  public static real.grpc.client.MoveRelativeCommand parseFrom(
       java.nio.ByteBuffer data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static real.grpc.PingResponse parseFrom(
+  public static real.grpc.client.MoveRelativeCommand parseFrom(
       java.nio.ByteBuffer data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static real.grpc.PingResponse parseFrom(
+  public static real.grpc.client.MoveRelativeCommand parseFrom(
       com.google.protobuf.ByteString data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static real.grpc.PingResponse parseFrom(
+  public static real.grpc.client.MoveRelativeCommand parseFrom(
       com.google.protobuf.ByteString data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static real.grpc.PingResponse parseFrom(byte[] data)
+  public static real.grpc.client.MoveRelativeCommand parseFrom(byte[] data)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data);
   }
-  public static real.grpc.PingResponse parseFrom(
+  public static real.grpc.client.MoveRelativeCommand parseFrom(
       byte[] data,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws com.google.protobuf.InvalidProtocolBufferException {
     return PARSER.parseFrom(data, extensionRegistry);
   }
-  public static real.grpc.PingResponse parseFrom(java.io.InputStream input)
+  public static real.grpc.client.MoveRelativeCommand parseFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static real.grpc.PingResponse parseFrom(
+  public static real.grpc.client.MoveRelativeCommand parseFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -160,26 +210,26 @@ private static final long serialVersionUID = 0L;
         .parseWithIOException(PARSER, input, extensionRegistry);
   }
 
-  public static real.grpc.PingResponse parseDelimitedFrom(java.io.InputStream input)
+  public static real.grpc.client.MoveRelativeCommand parseDelimitedFrom(java.io.InputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input);
   }
 
-  public static real.grpc.PingResponse parseDelimitedFrom(
+  public static real.grpc.client.MoveRelativeCommand parseDelimitedFrom(
       java.io.InputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
   }
-  public static real.grpc.PingResponse parseFrom(
+  public static real.grpc.client.MoveRelativeCommand parseFrom(
       com.google.protobuf.CodedInputStream input)
       throws java.io.IOException {
     return com.google.protobuf.GeneratedMessageV3
         .parseWithIOException(PARSER, input);
   }
-  public static real.grpc.PingResponse parseFrom(
+  public static real.grpc.client.MoveRelativeCommand parseFrom(
       com.google.protobuf.CodedInputStream input,
       com.google.protobuf.ExtensionRegistryLite extensionRegistry)
       throws java.io.IOException {
@@ -192,7 +242,7 @@ private static final long serialVersionUID = 0L;
   public static Builder newBuilder() {
     return DEFAULT_INSTANCE.toBuilder();
   }
-  public static Builder newBuilder(real.grpc.PingResponse prototype) {
+  public static Builder newBuilder(real.grpc.client.MoveRelativeCommand prototype) {
     return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
   }
   @java.lang.Override
@@ -208,26 +258,26 @@ private static final long serialVersionUID = 0L;
     return builder;
   }
   /**
-   * Protobuf type {@code real.grpc.PingResponse}
+   * Protobuf type {@code real.grpc.client.MoveRelativeCommand}
    */
   public static final class Builder extends
       com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-      // @@protoc_insertion_point(builder_implements:real.grpc.PingResponse)
-      real.grpc.PingResponseOrBuilder {
+      // @@protoc_insertion_point(builder_implements:real.grpc.client.MoveRelativeCommand)
+      real.grpc.client.MoveRelativeCommandOrBuilder {
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return real.grpc.Client.internal_static_real_grpc_PingResponse_descriptor;
+      return real.grpc.client.ClientOuterClass.internal_static_real_grpc_client_MoveRelativeCommand_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return real.grpc.Client.internal_static_real_grpc_PingResponse_fieldAccessorTable
+      return real.grpc.client.ClientOuterClass.internal_static_real_grpc_client_MoveRelativeCommand_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              real.grpc.PingResponse.class, real.grpc.PingResponse.Builder.class);
+              real.grpc.client.MoveRelativeCommand.class, real.grpc.client.MoveRelativeCommand.Builder.class);
     }
 
-    // Construct using real.grpc.PingResponse.newBuilder()
+    // Construct using real.grpc.client.MoveRelativeCommand.newBuilder()
     private Builder() {
 
     }
@@ -241,24 +291,26 @@ private static final long serialVersionUID = 0L;
     public Builder clear() {
       super.clear();
       bitField0_ = 0;
-      robotId_ = 0;
+      x_ = 0F;
+      y_ = 0F;
+      theta_ = 0F;
       return this;
     }
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.Descriptor
         getDescriptorForType() {
-      return real.grpc.Client.internal_static_real_grpc_PingResponse_descriptor;
+      return real.grpc.client.ClientOuterClass.internal_static_real_grpc_client_MoveRelativeCommand_descriptor;
     }
 
     @java.lang.Override
-    public real.grpc.PingResponse getDefaultInstanceForType() {
-      return real.grpc.PingResponse.getDefaultInstance();
+    public real.grpc.client.MoveRelativeCommand getDefaultInstanceForType() {
+      return real.grpc.client.MoveRelativeCommand.getDefaultInstance();
     }
 
     @java.lang.Override
-    public real.grpc.PingResponse build() {
-      real.grpc.PingResponse result = buildPartial();
+    public real.grpc.client.MoveRelativeCommand build() {
+      real.grpc.client.MoveRelativeCommand result = buildPartial();
       if (!result.isInitialized()) {
         throw newUninitializedMessageException(result);
       }
@@ -266,17 +318,23 @@ private static final long serialVersionUID = 0L;
     }
 
     @java.lang.Override
-    public real.grpc.PingResponse buildPartial() {
-      real.grpc.PingResponse result = new real.grpc.PingResponse(this);
+    public real.grpc.client.MoveRelativeCommand buildPartial() {
+      real.grpc.client.MoveRelativeCommand result = new real.grpc.client.MoveRelativeCommand(this);
       if (bitField0_ != 0) { buildPartial0(result); }
       onBuilt();
       return result;
     }
 
-    private void buildPartial0(real.grpc.PingResponse result) {
+    private void buildPartial0(real.grpc.client.MoveRelativeCommand result) {
       int from_bitField0_ = bitField0_;
       if (((from_bitField0_ & 0x00000001) != 0)) {
-        result.robotId_ = robotId_;
+        result.x_ = x_;
+      }
+      if (((from_bitField0_ & 0x00000002) != 0)) {
+        result.y_ = y_;
+      }
+      if (((from_bitField0_ & 0x00000004) != 0)) {
+        result.theta_ = theta_;
       }
     }
 
@@ -314,18 +372,24 @@ private static final long serialVersionUID = 0L;
     }
     @java.lang.Override
     public Builder mergeFrom(com.google.protobuf.Message other) {
-      if (other instanceof real.grpc.PingResponse) {
-        return mergeFrom((real.grpc.PingResponse)other);
+      if (other instanceof real.grpc.client.MoveRelativeCommand) {
+        return mergeFrom((real.grpc.client.MoveRelativeCommand)other);
       } else {
         super.mergeFrom(other);
         return this;
       }
     }
 
-    public Builder mergeFrom(real.grpc.PingResponse other) {
-      if (other == real.grpc.PingResponse.getDefaultInstance()) return this;
-      if (other.getRobotId() != 0) {
-        setRobotId(other.getRobotId());
+    public Builder mergeFrom(real.grpc.client.MoveRelativeCommand other) {
+      if (other == real.grpc.client.MoveRelativeCommand.getDefaultInstance()) return this;
+      if (other.getX() != 0F) {
+        setX(other.getX());
+      }
+      if (other.getY() != 0F) {
+        setY(other.getY());
+      }
+      if (other.getTheta() != 0F) {
+        setTheta(other.getTheta());
       }
       this.mergeUnknownFields(other.getUnknownFields());
       onChanged();
@@ -353,11 +417,21 @@ private static final long serialVersionUID = 0L;
             case 0:
               done = true;
               break;
-            case 8: {
-              robotId_ = input.readInt32();
+            case 13: {
+              x_ = input.readFloat();
               bitField0_ |= 0x00000001;
               break;
-            } // case 8
+            } // case 13
+            case 21: {
+              y_ = input.readFloat();
+              bitField0_ |= 0x00000002;
+              break;
+            } // case 21
+            case 29: {
+              theta_ = input.readFloat();
+              bitField0_ |= 0x00000004;
+              break;
+            } // case 29
             default: {
               if (!super.parseUnknownField(input, extensionRegistry, tag)) {
                 done = true; // was an endgroup tag
@@ -375,34 +449,98 @@ private static final long serialVersionUID = 0L;
     }
     private int bitField0_;
 
-    private int robotId_ ;
+    private float x_ ;
     /**
-     * <code>int32 robot_id = 1;</code>
-     * @return The robotId.
+     * <code>float x = 1;</code>
+     * @return The x.
      */
     @java.lang.Override
-    public int getRobotId() {
-      return robotId_;
+    public float getX() {
+      return x_;
     }
     /**
-     * <code>int32 robot_id = 1;</code>
-     * @param value The robotId to set.
+     * <code>float x = 1;</code>
+     * @param value The x to set.
      * @return This builder for chaining.
      */
-    public Builder setRobotId(int value) {
+    public Builder setX(float value) {
 
-      robotId_ = value;
+      x_ = value;
       bitField0_ |= 0x00000001;
       onChanged();
       return this;
     }
     /**
-     * <code>int32 robot_id = 1;</code>
+     * <code>float x = 1;</code>
      * @return This builder for chaining.
      */
-    public Builder clearRobotId() {
+    public Builder clearX() {
       bitField0_ = (bitField0_ & ~0x00000001);
-      robotId_ = 0;
+      x_ = 0F;
+      onChanged();
+      return this;
+    }
+
+    private float y_ ;
+    /**
+     * <code>float y = 2;</code>
+     * @return The y.
+     */
+    @java.lang.Override
+    public float getY() {
+      return y_;
+    }
+    /**
+     * <code>float y = 2;</code>
+     * @param value The y to set.
+     * @return This builder for chaining.
+     */
+    public Builder setY(float value) {
+
+      y_ = value;
+      bitField0_ |= 0x00000002;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>float y = 2;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearY() {
+      bitField0_ = (bitField0_ & ~0x00000002);
+      y_ = 0F;
+      onChanged();
+      return this;
+    }
+
+    private float theta_ ;
+    /**
+     * <code>float theta = 3;</code>
+     * @return The theta.
+     */
+    @java.lang.Override
+    public float getTheta() {
+      return theta_;
+    }
+    /**
+     * <code>float theta = 3;</code>
+     * @param value The theta to set.
+     * @return This builder for chaining.
+     */
+    public Builder setTheta(float value) {
+
+      theta_ = value;
+      bitField0_ |= 0x00000004;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>float theta = 3;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearTheta() {
+      bitField0_ = (bitField0_ & ~0x00000004);
+      theta_ = 0F;
       onChanged();
       return this;
     }
@@ -419,23 +557,23 @@ private static final long serialVersionUID = 0L;
     }
 
 
-    // @@protoc_insertion_point(builder_scope:real.grpc.PingResponse)
+    // @@protoc_insertion_point(builder_scope:real.grpc.client.MoveRelativeCommand)
   }
 
-  // @@protoc_insertion_point(class_scope:real.grpc.PingResponse)
-  private static final real.grpc.PingResponse DEFAULT_INSTANCE;
+  // @@protoc_insertion_point(class_scope:real.grpc.client.MoveRelativeCommand)
+  private static final real.grpc.client.MoveRelativeCommand DEFAULT_INSTANCE;
   static {
-    DEFAULT_INSTANCE = new real.grpc.PingResponse();
+    DEFAULT_INSTANCE = new real.grpc.client.MoveRelativeCommand();
   }
 
-  public static real.grpc.PingResponse getDefaultInstance() {
+  public static real.grpc.client.MoveRelativeCommand getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  private static final com.google.protobuf.Parser<PingResponse>
-      PARSER = new com.google.protobuf.AbstractParser<PingResponse>() {
+  private static final com.google.protobuf.Parser<MoveRelativeCommand>
+      PARSER = new com.google.protobuf.AbstractParser<MoveRelativeCommand>() {
     @java.lang.Override
-    public PingResponse parsePartialFrom(
+    public MoveRelativeCommand parsePartialFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -454,17 +592,17 @@ private static final long serialVersionUID = 0L;
     }
   };
 
-  public static com.google.protobuf.Parser<PingResponse> parser() {
+  public static com.google.protobuf.Parser<MoveRelativeCommand> parser() {
     return PARSER;
   }
 
   @java.lang.Override
-  public com.google.protobuf.Parser<PingResponse> getParserForType() {
+  public com.google.protobuf.Parser<MoveRelativeCommand> getParserForType() {
     return PARSER;
   }
 
   @java.lang.Override
-  public real.grpc.PingResponse getDefaultInstanceForType() {
+  public real.grpc.client.MoveRelativeCommand getDefaultInstanceForType() {
     return DEFAULT_INSTANCE;
   }
 

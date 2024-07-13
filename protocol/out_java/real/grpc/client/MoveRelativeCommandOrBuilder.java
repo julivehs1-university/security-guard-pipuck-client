@@ -2,10 +2,10 @@
 // source: Client.proto
 
 // Protobuf Java Version: 3.25.1
-package real.grpc;
+package real.grpc.client;
 
 public interface MoveRelativeCommandOrBuilder extends
-    // @@protoc_insertion_point(interface_extends:real.grpc.MoveRelativeCommand)
+    // @@protoc_insertion_point(interface_extends:real.grpc.client.MoveRelativeCommand)
     com.google.protobuf.MessageOrBuilder {
 
   /**

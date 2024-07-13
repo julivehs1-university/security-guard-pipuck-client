@@ -1,4 +1,4 @@
-package real.grpc;
+package real.grpc.client;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 
@@ -8,37 +8,37 @@ import static io.grpc.MethodDescriptor.generateFullMethodName;
     value = "by gRPC proto compiler (version 1.65.0)",
     comments = "Source: Client.proto")
 @io.grpc.stub.annotations.GrpcGenerated
-public final class TrackerGrpc {
+public final class ClientGrpc {
 
-  private TrackerGrpc() {}
+  private ClientGrpc() {}
 
-  public static final java.lang.String SERVICE_NAME = "real.grpc.Tracker";
+  public static final java.lang.String SERVICE_NAME = "real.grpc.client.Client";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<real.grpc.Empty,
-      real.grpc.PingResponse> getPingMethod;
+  private static volatile io.grpc.MethodDescriptor<real.grpc.client.Empty,
+      real.grpc.client.PingResponse> getPingMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "Ping",
-      requestType = real.grpc.Empty.class,
-      responseType = real.grpc.PingResponse.class,
+      requestType = real.grpc.client.Empty.class,
+      responseType = real.grpc.client.PingResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<real.grpc.Empty,
-      real.grpc.PingResponse> getPingMethod() {
-    io.grpc.MethodDescriptor<real.grpc.Empty, real.grpc.PingResponse> getPingMethod;
-    if ((getPingMethod = TrackerGrpc.getPingMethod) == null) {
-      synchronized (TrackerGrpc.class) {
-        if ((getPingMethod = TrackerGrpc.getPingMethod) == null) {
-          TrackerGrpc.getPingMethod = getPingMethod =
-              io.grpc.MethodDescriptor.<real.grpc.Empty, real.grpc.PingResponse>newBuilder()
+  public static io.grpc.MethodDescriptor<real.grpc.client.Empty,
+      real.grpc.client.PingResponse> getPingMethod() {
+    io.grpc.MethodDescriptor<real.grpc.client.Empty, real.grpc.client.PingResponse> getPingMethod;
+    if ((getPingMethod = ClientGrpc.getPingMethod) == null) {
+      synchronized (ClientGrpc.class) {
+        if ((getPingMethod = ClientGrpc.getPingMethod) == null) {
+          ClientGrpc.getPingMethod = getPingMethod =
+              io.grpc.MethodDescriptor.<real.grpc.client.Empty, real.grpc.client.PingResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "Ping"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  real.grpc.Empty.getDefaultInstance()))
+                  real.grpc.client.Empty.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  real.grpc.PingResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new TrackerMethodDescriptorSupplier("Ping"))
+                  real.grpc.client.PingResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ClientMethodDescriptorSupplier("Ping"))
               .build();
         }
       }
@@ -46,30 +46,30 @@ public final class TrackerGrpc {
     return getPingMethod;
   }
 
-  private static volatile io.grpc.MethodDescriptor<real.grpc.MoveRelativeCommand,
-      real.grpc.MoveResponse> getMoveToMethod;
+  private static volatile io.grpc.MethodDescriptor<real.grpc.client.MoveRelativeCommand,
+      real.grpc.client.MoveResponse> getMoveToMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "MoveTo",
-      requestType = real.grpc.MoveRelativeCommand.class,
-      responseType = real.grpc.MoveResponse.class,
+      requestType = real.grpc.client.MoveRelativeCommand.class,
+      responseType = real.grpc.client.MoveResponse.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<real.grpc.MoveRelativeCommand,
-      real.grpc.MoveResponse> getMoveToMethod() {
-    io.grpc.MethodDescriptor<real.grpc.MoveRelativeCommand, real.grpc.MoveResponse> getMoveToMethod;
-    if ((getMoveToMethod = TrackerGrpc.getMoveToMethod) == null) {
-      synchronized (TrackerGrpc.class) {
-        if ((getMoveToMethod = TrackerGrpc.getMoveToMethod) == null) {
-          TrackerGrpc.getMoveToMethod = getMoveToMethod =
-              io.grpc.MethodDescriptor.<real.grpc.MoveRelativeCommand, real.grpc.MoveResponse>newBuilder()
+  public static io.grpc.MethodDescriptor<real.grpc.client.MoveRelativeCommand,
+      real.grpc.client.MoveResponse> getMoveToMethod() {
+    io.grpc.MethodDescriptor<real.grpc.client.MoveRelativeCommand, real.grpc.client.MoveResponse> getMoveToMethod;
+    if ((getMoveToMethod = ClientGrpc.getMoveToMethod) == null) {
+      synchronized (ClientGrpc.class) {
+        if ((getMoveToMethod = ClientGrpc.getMoveToMethod) == null) {
+          ClientGrpc.getMoveToMethod = getMoveToMethod =
+              io.grpc.MethodDescriptor.<real.grpc.client.MoveRelativeCommand, real.grpc.client.MoveResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "MoveTo"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  real.grpc.MoveRelativeCommand.getDefaultInstance()))
+                  real.grpc.client.MoveRelativeCommand.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  real.grpc.MoveResponse.getDefaultInstance()))
-              .setSchemaDescriptor(new TrackerMethodDescriptorSupplier("MoveTo"))
+                  real.grpc.client.MoveResponse.getDefaultInstance()))
+              .setSchemaDescriptor(new ClientMethodDescriptorSupplier("MoveTo"))
               .build();
         }
       }
@@ -80,45 +80,45 @@ public final class TrackerGrpc {
   /**
    * Creates a new async stub that supports all call types for the service
    */
-  public static TrackerStub newStub(io.grpc.Channel channel) {
-    io.grpc.stub.AbstractStub.StubFactory<TrackerStub> factory =
-      new io.grpc.stub.AbstractStub.StubFactory<TrackerStub>() {
+  public static ClientStub newStub(io.grpc.Channel channel) {
+    io.grpc.stub.AbstractStub.StubFactory<ClientStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<ClientStub>() {
         @java.lang.Override
-        public TrackerStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-          return new TrackerStub(channel, callOptions);
+        public ClientStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new ClientStub(channel, callOptions);
         }
       };
-    return TrackerStub.newStub(factory, channel);
+    return ClientStub.newStub(factory, channel);
   }
 
   /**
    * Creates a new blocking-style stub that supports unary and streaming output calls on the service
    */
-  public static TrackerBlockingStub newBlockingStub(
+  public static ClientBlockingStub newBlockingStub(
       io.grpc.Channel channel) {
-    io.grpc.stub.AbstractStub.StubFactory<TrackerBlockingStub> factory =
-      new io.grpc.stub.AbstractStub.StubFactory<TrackerBlockingStub>() {
+    io.grpc.stub.AbstractStub.StubFactory<ClientBlockingStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<ClientBlockingStub>() {
         @java.lang.Override
-        public TrackerBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-          return new TrackerBlockingStub(channel, callOptions);
+        public ClientBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new ClientBlockingStub(channel, callOptions);
         }
       };
-    return TrackerBlockingStub.newStub(factory, channel);
+    return ClientBlockingStub.newStub(factory, channel);
   }
 
   /**
    * Creates a new ListenableFuture-style stub that supports unary calls on the service
    */
-  public static TrackerFutureStub newFutureStub(
+  public static ClientFutureStub newFutureStub(
       io.grpc.Channel channel) {
-    io.grpc.stub.AbstractStub.StubFactory<TrackerFutureStub> factory =
-      new io.grpc.stub.AbstractStub.StubFactory<TrackerFutureStub>() {
+    io.grpc.stub.AbstractStub.StubFactory<ClientFutureStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<ClientFutureStub>() {
         @java.lang.Override
-        public TrackerFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-          return new TrackerFutureStub(channel, callOptions);
+        public ClientFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new ClientFutureStub(channel, callOptions);
         }
       };
-    return TrackerFutureStub.newStub(factory, channel);
+    return ClientFutureStub.newStub(factory, channel);
   }
 
   /**
@@ -127,122 +127,122 @@ public final class TrackerGrpc {
 
     /**
      */
-    default void ping(real.grpc.Empty request,
-        io.grpc.stub.StreamObserver<real.grpc.PingResponse> responseObserver) {
+    default void ping(real.grpc.client.Empty request,
+        io.grpc.stub.StreamObserver<real.grpc.client.PingResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getPingMethod(), responseObserver);
     }
 
     /**
      */
-    default void moveTo(real.grpc.MoveRelativeCommand request,
-        io.grpc.stub.StreamObserver<real.grpc.MoveResponse> responseObserver) {
+    default void moveTo(real.grpc.client.MoveRelativeCommand request,
+        io.grpc.stub.StreamObserver<real.grpc.client.MoveResponse> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getMoveToMethod(), responseObserver);
     }
   }
 
   /**
-   * Base class for the server implementation of the service Tracker.
+   * Base class for the server implementation of the service Client.
    */
-  public static abstract class TrackerImplBase
+  public static abstract class ClientImplBase
       implements io.grpc.BindableService, AsyncService {
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
-      return TrackerGrpc.bindService(this);
+      return ClientGrpc.bindService(this);
     }
   }
 
   /**
-   * A stub to allow clients to do asynchronous rpc calls to service Tracker.
+   * A stub to allow clients to do asynchronous rpc calls to service Client.
    */
-  public static final class TrackerStub
-      extends io.grpc.stub.AbstractAsyncStub<TrackerStub> {
-    private TrackerStub(
+  public static final class ClientStub
+      extends io.grpc.stub.AbstractAsyncStub<ClientStub> {
+    private ClientStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected TrackerStub build(
+    protected ClientStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-      return new TrackerStub(channel, callOptions);
+      return new ClientStub(channel, callOptions);
     }
 
     /**
      */
-    public void ping(real.grpc.Empty request,
-        io.grpc.stub.StreamObserver<real.grpc.PingResponse> responseObserver) {
+    public void ping(real.grpc.client.Empty request,
+        io.grpc.stub.StreamObserver<real.grpc.client.PingResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getPingMethod(), getCallOptions()), request, responseObserver);
     }
 
     /**
      */
-    public void moveTo(real.grpc.MoveRelativeCommand request,
-        io.grpc.stub.StreamObserver<real.grpc.MoveResponse> responseObserver) {
+    public void moveTo(real.grpc.client.MoveRelativeCommand request,
+        io.grpc.stub.StreamObserver<real.grpc.client.MoveResponse> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getMoveToMethod(), getCallOptions()), request, responseObserver);
     }
   }
 
   /**
-   * A stub to allow clients to do synchronous rpc calls to service Tracker.
+   * A stub to allow clients to do synchronous rpc calls to service Client.
    */
-  public static final class TrackerBlockingStub
-      extends io.grpc.stub.AbstractBlockingStub<TrackerBlockingStub> {
-    private TrackerBlockingStub(
+  public static final class ClientBlockingStub
+      extends io.grpc.stub.AbstractBlockingStub<ClientBlockingStub> {
+    private ClientBlockingStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected TrackerBlockingStub build(
+    protected ClientBlockingStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-      return new TrackerBlockingStub(channel, callOptions);
+      return new ClientBlockingStub(channel, callOptions);
     }
 
     /**
      */
-    public real.grpc.PingResponse ping(real.grpc.Empty request) {
+    public real.grpc.client.PingResponse ping(real.grpc.client.Empty request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getPingMethod(), getCallOptions(), request);
     }
 
     /**
      */
-    public real.grpc.MoveResponse moveTo(real.grpc.MoveRelativeCommand request) {
+    public real.grpc.client.MoveResponse moveTo(real.grpc.client.MoveRelativeCommand request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getMoveToMethod(), getCallOptions(), request);
     }
   }
 
   /**
-   * A stub to allow clients to do ListenableFuture-style rpc calls to service Tracker.
+   * A stub to allow clients to do ListenableFuture-style rpc calls to service Client.
    */
-  public static final class TrackerFutureStub
-      extends io.grpc.stub.AbstractFutureStub<TrackerFutureStub> {
-    private TrackerFutureStub(
+  public static final class ClientFutureStub
+      extends io.grpc.stub.AbstractFutureStub<ClientFutureStub> {
+    private ClientFutureStub(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected TrackerFutureStub build(
+    protected ClientFutureStub build(
         io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
-      return new TrackerFutureStub(channel, callOptions);
+      return new ClientFutureStub(channel, callOptions);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<real.grpc.PingResponse> ping(
-        real.grpc.Empty request) {
+    public com.google.common.util.concurrent.ListenableFuture<real.grpc.client.PingResponse> ping(
+        real.grpc.client.Empty request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getPingMethod(), getCallOptions()), request);
     }
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<real.grpc.MoveResponse> moveTo(
-        real.grpc.MoveRelativeCommand request) {
+    public com.google.common.util.concurrent.ListenableFuture<real.grpc.client.MoveResponse> moveTo(
+        real.grpc.client.MoveRelativeCommand request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getMoveToMethod(), getCallOptions()), request);
     }
@@ -269,12 +269,12 @@ public final class TrackerGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_PING:
-          serviceImpl.ping((real.grpc.Empty) request,
-              (io.grpc.stub.StreamObserver<real.grpc.PingResponse>) responseObserver);
+          serviceImpl.ping((real.grpc.client.Empty) request,
+              (io.grpc.stub.StreamObserver<real.grpc.client.PingResponse>) responseObserver);
           break;
         case METHODID_MOVE_TO:
-          serviceImpl.moveTo((real.grpc.MoveRelativeCommand) request,
-              (io.grpc.stub.StreamObserver<real.grpc.MoveResponse>) responseObserver);
+          serviceImpl.moveTo((real.grpc.client.MoveRelativeCommand) request,
+              (io.grpc.stub.StreamObserver<real.grpc.client.MoveResponse>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -298,45 +298,45 @@ public final class TrackerGrpc {
           getPingMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              real.grpc.Empty,
-              real.grpc.PingResponse>(
+              real.grpc.client.Empty,
+              real.grpc.client.PingResponse>(
                 service, METHODID_PING)))
         .addMethod(
           getMoveToMethod(),
           io.grpc.stub.ServerCalls.asyncUnaryCall(
             new MethodHandlers<
-              real.grpc.MoveRelativeCommand,
-              real.grpc.MoveResponse>(
+              real.grpc.client.MoveRelativeCommand,
+              real.grpc.client.MoveResponse>(
                 service, METHODID_MOVE_TO)))
         .build();
   }
 
-  private static abstract class TrackerBaseDescriptorSupplier
+  private static abstract class ClientBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
-    TrackerBaseDescriptorSupplier() {}
+    ClientBaseDescriptorSupplier() {}
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return real.grpc.Client.getDescriptor();
+      return real.grpc.client.ClientOuterClass.getDescriptor();
     }
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
-      return getFileDescriptor().findServiceByName("Tracker");
+      return getFileDescriptor().findServiceByName("Client");
     }
   }
 
-  private static final class TrackerFileDescriptorSupplier
-      extends TrackerBaseDescriptorSupplier {
-    TrackerFileDescriptorSupplier() {}
+  private static final class ClientFileDescriptorSupplier
+      extends ClientBaseDescriptorSupplier {
+    ClientFileDescriptorSupplier() {}
   }
 
-  private static final class TrackerMethodDescriptorSupplier
-      extends TrackerBaseDescriptorSupplier
+  private static final class ClientMethodDescriptorSupplier
+      extends ClientBaseDescriptorSupplier
       implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
     private final java.lang.String methodName;
 
-    TrackerMethodDescriptorSupplier(java.lang.String methodName) {
+    ClientMethodDescriptorSupplier(java.lang.String methodName) {
       this.methodName = methodName;
     }
 
@@ -351,11 +351,11 @@ public final class TrackerGrpc {
   public static io.grpc.ServiceDescriptor getServiceDescriptor() {
     io.grpc.ServiceDescriptor result = serviceDescriptor;
     if (result == null) {
-      synchronized (TrackerGrpc.class) {
+      synchronized (ClientGrpc.class) {
         result = serviceDescriptor;
         if (result == null) {
           serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
-              .setSchemaDescriptor(new TrackerFileDescriptorSupplier())
+              .setSchemaDescriptor(new ClientFileDescriptorSupplier())
               .addMethod(getPingMethod())
               .addMethod(getMoveToMethod())
               .build();

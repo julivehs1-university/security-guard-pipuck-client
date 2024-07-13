@@ -30,7 +30,7 @@ if _version_not_supported:
     )
 
 
-class TrackerStub(object):
+class ClientStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -40,18 +40,18 @@ class TrackerStub(object):
             channel: A grpc.Channel.
         """
         self.Ping = channel.unary_unary(
-                '/real.grpc.Tracker/Ping',
+                '/real.grpc.client.Client/Ping',
                 request_serializer=Client__pb2.Empty.SerializeToString,
                 response_deserializer=Client__pb2.PingResponse.FromString,
                 _registered_method=True)
         self.MoveTo = channel.unary_unary(
-                '/real.grpc.Tracker/MoveTo',
+                '/real.grpc.client.Client/MoveTo',
                 request_serializer=Client__pb2.MoveRelativeCommand.SerializeToString,
                 response_deserializer=Client__pb2.MoveResponse.FromString,
                 _registered_method=True)
 
 
-class TrackerServicer(object):
+class ClientServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def Ping(self, request, context):
@@ -67,7 +67,7 @@ class TrackerServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_TrackerServicer_to_server(servicer, server):
+def add_ClientServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'Ping': grpc.unary_unary_rpc_method_handler(
                     servicer.Ping,
@@ -81,13 +81,13 @@ def add_TrackerServicer_to_server(servicer, server):
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'real.grpc.Tracker', rpc_method_handlers)
+            'real.grpc.client.Client', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('real.grpc.Tracker', rpc_method_handlers)
+    server.add_registered_method_handlers('real.grpc.client.Client', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
-class Tracker(object):
+class Client(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
@@ -104,7 +104,7 @@ class Tracker(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/real.grpc.Tracker/Ping',
+            '/real.grpc.client.Client/Ping',
             Client__pb2.Empty.SerializeToString,
             Client__pb2.PingResponse.FromString,
             options,
@@ -131,7 +131,7 @@ class Tracker(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/real.grpc.Tracker/MoveTo',
+            '/real.grpc.client.Client/MoveTo',
             Client__pb2.MoveRelativeCommand.SerializeToString,
             Client__pb2.MoveResponse.FromString,
             options,

@@ -2,10 +2,10 @@
 // source: Client.proto
 
 // Protobuf Java Version: 3.25.1
-package real.grpc;
+package real.grpc.client;
 
-public final class Client {
-  private Client() {}
+public final class ClientOuterClass {
+  private ClientOuterClass() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistryLite registry) {
   }
@@ -16,25 +16,25 @@ public final class Client {
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_real_grpc_Empty_descriptor;
+    internal_static_real_grpc_client_Empty_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_real_grpc_Empty_fieldAccessorTable;
+      internal_static_real_grpc_client_Empty_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_real_grpc_PingResponse_descriptor;
+    internal_static_real_grpc_client_PingResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_real_grpc_PingResponse_fieldAccessorTable;
+      internal_static_real_grpc_client_PingResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_real_grpc_MoveResponse_descriptor;
+    internal_static_real_grpc_client_MoveResponse_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_real_grpc_MoveResponse_fieldAccessorTable;
+      internal_static_real_grpc_client_MoveResponse_fieldAccessorTable;
   static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_real_grpc_MoveRelativeCommand_descriptor;
+    internal_static_real_grpc_client_MoveRelativeCommand_descriptor;
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_real_grpc_MoveRelativeCommand_fieldAccessorTable;
+      internal_static_real_grpc_client_MoveRelativeCommand_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -44,42 +44,43 @@ public final class Client {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014Client.proto\022\treal.grpc\"\007\n\005Empty\" \n\014Pi" +
-      "ngResponse\022\020\n\010robot_id\030\001 \001(\005\"\037\n\014MoveResp" +
-      "onse\022\017\n\007success\030\001 \001(\010\":\n\023MoveRelativeCom" +
-      "mand\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\022\r\n\005theta\030\003 \001(" +
-      "\0022\203\001\n\007Tracker\0223\n\004Ping\022\020.real.grpc.Empty\032" +
-      "\027.real.grpc.PingResponse\"\000\022C\n\006MoveTo\022\036.r" +
-      "eal.grpc.MoveRelativeCommand\032\027.real.grpc" +
-      ".MoveResponse\"\000B\002P\001b\006proto3"
+      "\n\014Client.proto\022\020real.grpc.client\"\007\n\005Empt" +
+      "y\" \n\014PingResponse\022\020\n\010robot_id\030\001 \001(\005\"\037\n\014M" +
+      "oveResponse\022\017\n\007success\030\001 \001(\010\":\n\023MoveRela" +
+      "tiveCommand\022\t\n\001x\030\001 \001(\002\022\t\n\001y\030\002 \001(\002\022\r\n\005the" +
+      "ta\030\003 \001(\0022\236\001\n\006Client\022A\n\004Ping\022\027.real.grpc." +
+      "client.Empty\032\036.real.grpc.client.PingResp" +
+      "onse\"\000\022Q\n\006MoveTo\022%.real.grpc.client.Move" +
+      "RelativeCommand\032\036.real.grpc.client.MoveR" +
+      "esponse\"\000B\002P\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         });
-    internal_static_real_grpc_Empty_descriptor =
+    internal_static_real_grpc_client_Empty_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_real_grpc_Empty_fieldAccessorTable = new
+    internal_static_real_grpc_client_Empty_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_real_grpc_Empty_descriptor,
+        internal_static_real_grpc_client_Empty_descriptor,
         new java.lang.String[] { });
-    internal_static_real_grpc_PingResponse_descriptor =
+    internal_static_real_grpc_client_PingResponse_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_real_grpc_PingResponse_fieldAccessorTable = new
+    internal_static_real_grpc_client_PingResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_real_grpc_PingResponse_descriptor,
+        internal_static_real_grpc_client_PingResponse_descriptor,
         new java.lang.String[] { "RobotId", });
-    internal_static_real_grpc_MoveResponse_descriptor =
+    internal_static_real_grpc_client_MoveResponse_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_real_grpc_MoveResponse_fieldAccessorTable = new
+    internal_static_real_grpc_client_MoveResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_real_grpc_MoveResponse_descriptor,
+        internal_static_real_grpc_client_MoveResponse_descriptor,
         new java.lang.String[] { "Success", });
-    internal_static_real_grpc_MoveRelativeCommand_descriptor =
+    internal_static_real_grpc_client_MoveRelativeCommand_descriptor =
       getDescriptor().getMessageTypes().get(3);
-    internal_static_real_grpc_MoveRelativeCommand_fieldAccessorTable = new
+    internal_static_real_grpc_client_MoveRelativeCommand_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_real_grpc_MoveRelativeCommand_descriptor,
+        internal_static_real_grpc_client_MoveRelativeCommand_descriptor,
         new java.lang.String[] { "X", "Y", "Theta", });
   }
 
