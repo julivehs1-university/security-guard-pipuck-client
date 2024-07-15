@@ -9,8 +9,13 @@ import sys
 import time
 import traceback
 
-from out_python.Tracker_pb2 import Position
-from out_python.Tracker_pb2_grpc import TrackerStub
+import logging
+from concurrent import futures
+
+import grpc
+
+from protocol.out_python.Client_pb2 import PingResponse, MoveResponse
+from protocol.out_python.Client_pb2_grpc import ClientServicer, add_ClientServicer_to_server
 
 I2C_CHANNEL = 12
 LEGACY_I2C_CHANNEL = 4
@@ -194,16 +199,27 @@ def move_to(x, y, theta_final):
 
 
 
-channel = grpc.insecure_channel('localhost:50051')
-stub = TrackerStub(channel)
+class Tracker(ClientServicer):
+    def MoveTo(self, request, context):
+        move_to(request.x, request.y, request.theta)
+        return MoveResponse(success=True)
 
-while True:
-    position = Position()
+    def Ping(self, request, context):
+        return PingResponse(robot_id=1)
 
-    feature = stub.GetPosition(position)
 
-    print(feature)
-    move_to(feature.x, feature.y, feature.orientation)
+def serve():
+    port = "50051"
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    add_ClientServicer_to_server(Tracker(), server)
+    server.add_insecure_port("[::]:" + port)
+    server.start()
+    print("Server started, listening on " + port)
+    server.wait_for_termination()
+
+if __name__ == "__main__":
+    logging.basicConfig()
+    serve()
 
 while 1:
     checksum = 0
@@ -219,7 +235,4 @@ while 1:
     break
 
 
-    # Communication frequency @ 20 Hz.
-    time_diff = time.time() - start
-    if time_diff < 0.050:
-        time.sleep(0.050 - time_diff);
+
