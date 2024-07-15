@@ -1,21 +1,24 @@
-syntax = "proto2";
-
-package protocol;
-
+syntax = "proto3";
 option java_multiple_files = true;
-option java_package = "securityguard.proto";
-option java_outer_classname = "ClientProtos";
+package real.grpc.client;
 
 
+service Client {
+  rpc Ping (Empty) returns (PingResponse) {}
+  rpc MoveTo (MoveRelativeCommand) returns (MoveResponse) {}
+}
 
-message Command {
-    oneof CommandOneof {
-        MoveRelativeCommand moveRelativeCommand = 1;
-    }
+message Empty {}
+message PingResponse {
+  int32 robot_id = 1;
+}
+
+message MoveResponse {
+    bool success = 1;
 }
 
 message MoveRelativeCommand {
-  required float x = 1;
-  required float y = 2;
-  required float theta = 3;
+  float x = 1;
+  float y = 2;
+  float theta = 3;
 }
