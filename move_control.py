@@ -3,10 +3,14 @@
 
 import math
 
+import grpc
 from smbus2 import SMBus, i2c_msg
 import sys
 import time
 import traceback
+
+from out_python.Tracker_pb2 import Position
+from out_python.Tracker_pb2_grpc import TrackerStub
 
 I2C_CHANNEL = 12
 LEGACY_I2C_CHANNEL = 4
@@ -31,15 +35,14 @@ MAX_MOTOR_STEPS_RAW = 65536
 MAX_SPEED = 1000
 
 
-i2c_last_called = 0
+i2c_next_call = time.time()
 
 def update_robot_sensors_and_actuators():
-    global sensors_data, actuators_data, i2c_last_called
-    now = time.time() * 1000
-    while now - i2c_last_called < 50:
-        now = time.time() * 1000
-        time.sleep(0.00001)
-    i2c_last_called = time.time() * 1000
+    global sensors_data, actuators_data, i2c_next_call
+    time_to_wait = i2c_next_call - time.time()
+    if time_to_wait > 0:
+        time.sleep(time_to_wait)
+    i2c_next_call = time.time() + 0.05
     try:
         write = i2c_msg.write(ROB_ADDR, actuators_data)
         read = i2c_msg.read(ROB_ADDR, SENSORS_SIZE)
@@ -179,7 +182,7 @@ def move_straight(distance):
     print("reached straigt")
 
 
-def ros_geklaut(x, y, theta_final):
+def move_to(x, y, theta_final):
 
     theta_to_goal = math.atan2(y, x)
 
@@ -191,17 +194,18 @@ def ros_geklaut(x, y, theta_final):
 
 
 
+channel = grpc.insecure_channel('localhost:50051')
+stub = TrackerStub(channel)
+
+while True:
+    position = Position()
+
+    feature = stub.GetPosition(position)
+
+    print(feature)
+    move_to(feature.x, feature.y, feature.orientation)
 
 while 1:
-    # print("x")
-    # x = input()
-    # print("y")
-    # y = input()
-    # print("angle")
-    # angle = input()
-    # start = time.time()
-
-
     checksum = 0
     for i in range(ACTUATORS_SIZE - 1):
         checksum ^= actuators_data[i]
@@ -209,51 +213,11 @@ while 1:
 
     update_robot_sensors_and_actuators()
 
-    ros_geklaut(0.1,0.1,math.pi/2)
+    move_to(0.1,0.1,math.pi/2)
     move_wheels(0,0)
     print("stopp")
     break
 
-    # if len(sensors_data) < 0:
-    #	sys.exit(1)
-
-    # Verify the checksum (Longitudinal Redundancy Check) before interpreting the received sensors data.
-    checksum = 0
-    for i in range(SENSORS_SIZE - 1):
-        checksum ^= sensors_data[i]
-    if (checksum == sensors_data[SENSORS_SIZE - 1]):
-        for i in range(8):
-            prox[i] = sensors_data[i * 2 + 1] * 256 + sensors_data[i * 2]
-        # print(
-        #     "prox: {0:4d}, {1:4d}, {2:4d}, {3:4d}, {4:4d}, {5:4d}, {6:4d}, {7:4d}\r\n".format(prox[0], prox[1], prox[2],
-        #                                                                                       prox[3], prox[4], prox[5],
-        #                                                                                       prox[6], prox[7]))
-        #
-        # for i in range(8):
-        #     prox_amb[i] = sensors_data[16 + i * 2 + 1] * 256 + sensors_data[16 + i * 2]
-        # print("ambient: {0:4d}, {1:4d}, {2:4d}, {3:4d}, {4:4d}, {5:4d}, {6:4d}, {7:4d}\r\n".format(prox_amb[0],
-        #                                                                                            prox_amb[1],
-        #                                                                                            prox_amb[2],
-        #                                                                                            prox_amb[3],
-        #                                                                                            prox_amb[4],
-        #                                                                                            prox_amb[5],
-        #                                                                                            prox_amb[6],
-        #                                                                                            prox_amb[7]))
-        #
-        # for i in range(4):
-        #     mic[i] = sensors_data[32 + i * 2 + 1] * 256 + sensors_data[32 + i * 2]
-        # print("mic: {0:4d}, {1:4d}, {2:4d}, {3:4d}\r\n".format(mic[0], mic[1], mic[2], mic[3]))
-        #
-        # print("sel: {0:2d}\r\n".format(sensors_data[40] & 0x0F))
-        # print("button: {0:1d}\r\n".format(sensors_data[40] >> 4))
-        for i in range(2):
-            mot_steps[i] = sensors_data[41 + i * 2 + 1] * 256 + sensors_data[41 + i * 2]
-        print("steps: {0:4d}, {1:4d}\r\n".format(mot_steps[0], mot_steps[1]))
-        # print("tv: {0:2d}\r\n".format(sensors_data[45]))
-        #
-        # print("\r\n")
-    else:
-        print("wrong checksum ({0:#x} != {0:#x})\r\n".format(sensors_data[ACTUATORS_SIZE - 1], checksum))
 
     # Communication frequency @ 20 Hz.
     time_diff = time.time() - start
