@@ -14,8 +14,8 @@ from concurrent import futures
 
 import grpc
 
-from protocol.out_python.Client_pb2 import PingResponse, MoveResponse
-from protocol.out_python.Client_pb2_grpc import ClientServicer, add_ClientServicer_to_server
+from out_python import Client_pb2 as Client_pb2
+from out_python import Client_pb2_grpc as Client_pb2_grpc
 
 I2C_CHANNEL = 12
 LEGACY_I2C_CHANNEL = 4
@@ -199,19 +199,19 @@ def move_to(x, y, theta_final):
 
 
 
-class Tracker(ClientServicer):
+class Tracker(Client_pb2_grpc.ClientServicer):
     def MoveTo(self, request, context):
         move_to(request.x, request.y, request.theta)
-        return MoveResponse(success=True)
+        return Client_pb2.MoveResponse(success=True)
 
     def Ping(self, request, context):
-        return PingResponse(robot_id=1)
+        return Client_pb2.PingResponse(robot_id=1)
 
 
 def serve():
     port = "50051"
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    add_ClientServicer_to_server(Tracker(), server)
+    Client_pb2_grpc.add_ClientServicer_to_server(Tracker(), server)
     server.add_insecure_port("[::]:" + port)
     server.start()
     print("Server started, listening on " + port)
@@ -221,18 +221,18 @@ if __name__ == "__main__":
     logging.basicConfig()
     serve()
 
-while 1:
-    checksum = 0
-    for i in range(ACTUATORS_SIZE - 1):
-        checksum ^= actuators_data[i]
-    actuators_data[ACTUATORS_SIZE - 1] = checksum
-
-    update_robot_sensors_and_actuators()
-
-    move_to(0.1,0.1,math.pi/2)
-    move_wheels(0,0)
-    print("stopp")
-    break
+# while 1:
+#     checksum = 0
+#     for i in range(ACTUATORS_SIZE - 1):
+#         checksum ^= actuators_data[i]
+#     actuators_data[ACTUATORS_SIZE - 1] = checksum
+#
+#     update_robot_sensors_and_actuators()
+#
+#     move_to(0.1,0.1,math.pi/2)
+#     move_wheels(0,0)
+#     print("stopp")
+#     break
 
 
 
