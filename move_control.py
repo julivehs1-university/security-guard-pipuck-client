@@ -47,7 +47,7 @@ def update_robot_sensors_and_actuators():
     time_to_wait = i2c_next_call - time.time()
     if time_to_wait > 0:
         time.sleep(time_to_wait)
-    i2c_next_call = time.time() + 0.05
+    i2c_next_call = time.time() + 0.1
     try:
         write = i2c_msg.write(ROB_ADDR, actuators_data)
         read = i2c_msg.read(ROB_ADDR, SENSORS_SIZE)
@@ -55,7 +55,7 @@ def update_robot_sensors_and_actuators():
         sensors_data = list(read)
     except Exception as e:
         traceback.print_exc()
-        sys.exit(1)
+        #sys.exit(1)
         #print("try again")
 
         #update_robot_sensors_and_actuators()
@@ -164,7 +164,8 @@ def turn(theta):
 
     while  from_steps  < real_left_steps < to_steps:
         real_left_steps, _ = calculate_real_steps()
-        move_wheels((256 + turn_direction * 2) % 256, (256 - turn_direction * 2) % 256)
+        print("from-to:", from_steps, real_left_steps, to_steps)
+        move_wheels((256 + turn_direction * 1) % 256, (256 - turn_direction * 1) % 256)
 
     move_wheels(0, 0)
     print("reached turn")
@@ -174,13 +175,14 @@ def move_straight(distance):
     real_left_steps, _ = calculate_real_steps()
 
     step_goal_left = distance/ MOTOR_STEP_DISTANCE
+    print("steps to goal:", step_goal_left)
     from_steps = real_left_steps - step_goal_left
     to_steps = real_left_steps + step_goal_left
 
-    print("distance_steps:", distance/ MOTOR_STEP_DISTANCE, "real", real_left_steps, "from", from_steps, "to", real_left_steps, "to", to_steps)
 
     while from_steps < real_left_steps < to_steps:
         real_left_steps, _ = calculate_real_steps()
+        print("from-to:", from_steps, real_left_steps, to_steps)
         move_wheels(2, 2)
 
     move_wheels(0, 0)
@@ -201,7 +203,7 @@ def move_to(x, y, theta_final):
 
 class Tracker(Client_pb2_grpc.ClientServicer):
     def MoveTo(self, request, context):
-        move_to(request.x, request.y, request.theta)
+        move_to(request.x/100, request.y/100, request.theta)
         return Client_pb2.MoveResponse(success=True)
 
     def Ping(self, request, context):
@@ -209,6 +211,7 @@ class Tracker(Client_pb2_grpc.ClientServicer):
 
 
 def serve():
+    turn(0.1)
     port = "50051"
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     Client_pb2_grpc.add_ClientServicer_to_server(Tracker(), server)
