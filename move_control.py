@@ -70,6 +70,8 @@ except:
         print("Cannot open I2C device")
         sys.exit(1)
 
+time.sleep(1)
+
 counter = 0
 actuators_state = 0
 
